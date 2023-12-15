@@ -1,4 +1,4 @@
-@import "colors";
+@import './../../styles/colors.scss';
 .cart {
   background-color: $pink;
   width: 100%;
@@ -79,6 +79,21 @@
       background-color: $dark;
       color: white;
       border-radius: 5px;
+    }
+  }
+  > .burger_info {
+    width: 80%;
+
+    > .burger_img {
+      width: 10%;
+      > img {
+        width: 100%;
+      }
+    }
+    > div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

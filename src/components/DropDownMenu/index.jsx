@@ -3,13 +3,8 @@ import './DropdownMenu.scss';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaUser } from 'react-icons/fa';
-import { CgMenuHotdog } from 'react-icons/cg';
-import { FiShoppingCart, FiLogIn } from 'react-icons/fi';
-
 export const DropdownMenu = ({ setOnMenuOpen, onMenuOpen }) => {
   const [navLinks, setNavLinks] = useState([]);
-  // const [onMenuOpen, setOnMenuOpen] = useState(false);
 
   useEffect(() => {
     const navs = [

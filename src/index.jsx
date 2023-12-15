@@ -5,6 +5,11 @@ import { MenuPage } from './pages/MenuPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LoginPage } from './pages/LoginPage';
+import { MyOrder } from './pages/OrderPage';
+import { OrderDetails } from './pages/OrderPage/OrderDetails';
+
+import { CartPage } from './pages/CartPage';
+import { ShippingPage } from './pages/ShippingPage';
 
 import React from 'react';
 import { App } from './App';
@@ -33,6 +38,22 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />,
+      },
+      {
+        path: '/cartpage',
+        element: <CartPage />,
+      },
+      {
+        path: '/shipping',
+        element: <ShippingPage />,
+      },
+      {
+        path: '/myorders',
+        element: <MyOrder />,
+      },
+      {
+        path: '/orderdetails',
+        element: <OrderDetails />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-@import "colors";
+@import './../../../styles/colors.scss';
 
 .orderDetails {
   background-color: $pink;
@@ -13,7 +13,7 @@
     > h1 {
       text-transform: uppercase;
       text-align: center;
-      font: 100 3rem "Roboto";
+      font: 100 3rem 'Roboto';
       margin: 3rem;
     }
 

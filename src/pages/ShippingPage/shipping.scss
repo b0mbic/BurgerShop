@@ -1,4 +1,4 @@
-@import "colors";
+@import './../../styles/colors.scss';
 
 .shipping {
   background-color: $pink;
@@ -15,7 +15,7 @@
       text-transform: uppercase;
       text-align: center;
       margin: 3rem;
-      font: 100 3rem "Roboto";
+      font: 100 3rem 'Roboto';
     }
 
     > form {
@@ -43,7 +43,22 @@
           font-size: 1rem;
         }
       }
-      
+      > a {
+        width: 30%;
+        > button {
+          background-color: $red;
+          color: white;
+          border: none;
+          padding: 1rem 1rem;
+          width: 100%;
+          border-radius: 10px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $reddark;
+          }
+        }
+      }
     }
   }
 }
@@ -77,6 +92,6 @@
 }
 
 .link:hover {
-  background-color:  $reddark;
+  background-color: $reddark;
   text-decoration: none;
 }
