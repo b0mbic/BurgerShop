@@ -1,0 +1,14 @@
+.icons--header {
+  display: flex;
+  flex-direction: column;
+  > h2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    margin: 2rem 0;
+  }
+  > .icons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
