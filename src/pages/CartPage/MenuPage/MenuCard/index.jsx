@@ -7,7 +7,7 @@ export const MenuCard = ({
   burgerSrc,
   price,
   title,
-  handler,
+  addToCartHandler,
   delay = 0,
 }) => {
   return (
@@ -32,9 +32,7 @@ export const MenuCard = ({
         <h5>₹{price}</h5>
 
         <p>{title}</p>
-        <Popup
-          trigger={<button onClick={() => handler(itemNum)}>Buy Now</button>}
-        >
+        <Popup trigger={<button onClick={addToCartHandler}>Buy Now</button>}>
           <div
             style={{
               color: 'red',
