@@ -13,11 +13,16 @@ import { ShippingPage } from './pages/ShippingPage';
 
 import React from 'react';
 import { App } from './App';
+import { ShopContextProvider } from './context/shop-context';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <ShopContextProvider>
+        <App />
+      </ShopContextProvider>
+    ),
     children: [
       {
         path: '/',
