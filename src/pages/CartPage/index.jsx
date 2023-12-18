@@ -1,34 +1,42 @@
 import './cart.scss';
 
-import React from 'react';
-
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import burger1 from './../../../public/assets/burger1.png';
 import burger2 from './../../../public/assets/burger2.png';
 import burger3 from './../../../public/assets/burger3.png';
+import { PRODUCTS } from '../../products';
+import { ShopContext } from '../../context/shop-context';
 
-const CartItem = ({ title, img, increment, decrement, quantity, price }) => (
-  <div className="cartItem">
-    <div className="burger_info">
-      <div className="burger_img">
-        <img src={img} alt="Item" />
+const CartItem = ({ title, img, increment, decrement, quantity, price }) => {
+  const { cartItems } = useContext(ShopContext);
+
+  return (
+    <div className="cartItem">
+      <div className="burger_info">
+        <div className="burger_img">
+          <img src={img} alt="Item" />
+        </div>
+        <div>
+          <h4>{title}</h4>
+          <h4> ₹{price}</h4>
+        </div>
       </div>
+
       <div>
-        <h4>{title}</h4>
-        <h4> ₹{price}</h4>
+        <button onClick={decrement}>-</button>
+        <input type="number" readOnly value={quantity} />
+        <button onClick={increment}>+</button>
       </div>
     </div>
-
-    <div>
-      <button onClick={decrement}>-</button>
-      <input type="number" readOnly value={quantity} />
-      <button onClick={increment}>+</button>
-    </div>
-  </div>
-);
+  );
+};
 
 export const CartPage = () => {
+  const { cartItems } = useContext(ShopContext);
+  const { addToCart } = useContext(ShopContext);
+  const { removeFromCart } = useContext(ShopContext);
+
   const [cheeseBugergerCount, setCheeseBugergerCount] = useState(0);
   const [vegBurgerCount, setVegBurgerCount] = useState(0);
   const [cheeseburgerWithFries, setCheeseburgerWithFries] = useState(0);
@@ -46,10 +54,38 @@ export const CartPage = () => {
   const shippingCharges = 200;
   const total = subTotal + tax + shippingCharges;
 
+  console.log(cartItems);
+  console.log(PRODUCTS);
+
   return (
     <section className="cart">
       <main>
-        <CartItem
+        {/* <CartItem
+          title={'Cheese Burger'}
+          img={burger1}
+          quantity={cheeseBugergerCount}
+          increment={increment(setCheeseBugergerCount)}
+          decrement={decrement(setCheeseBugergerCount)}
+          price={200}
+        /> */}
+
+        {PRODUCTS.map((product) => {
+          if (cartItems[product.itemNum] !== 0) {
+            return (
+              <CartItem
+                // key={product.itemNum}
+                title={product.title}
+                img={product.burgerSrc}
+                quantity={cartItems[product.itemNum]}
+                increment={increment(setCheeseBugergerCount)}
+                decrement={decrement(setCheeseBugergerCount)}
+                price={product.price}
+              />
+            );
+          }
+        })}
+
+        {/* <CartItem
           title={'Cheese Burger'}
           img={burger1}
           quantity={cheeseBugergerCount}
@@ -74,7 +110,7 @@ export const CartPage = () => {
           increment={increment(setCheeseburgerWithFries)}
           decrement={decrement(setCheeseburgerWithFries)}
           price={1800}
-        />
+        /> */}
 
         <article>
           <div>
