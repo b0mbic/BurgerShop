@@ -9,12 +9,11 @@ import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
 export const SignIn = () => {
-  const onSubmit = (data) => console.log(data);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('you are signed in');
   };
+
   return (
     <>
       <div className="icons--header">

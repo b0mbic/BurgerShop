@@ -6,11 +6,10 @@ import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 
 export const Register = () => {
-  const onSubmit = (data) => console.log(data);
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
