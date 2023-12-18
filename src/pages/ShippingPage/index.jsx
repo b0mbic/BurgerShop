@@ -10,9 +10,6 @@ import { useState } from 'react';
 
 export const ShippingPage = () => {
   const [countryID, setCountryID] = useState('');
-  console.log(Country.getAllCountries());
-  console.log(State.getAllStates());
-  console.log(State.getStatesOfCountry());
 
   return (
     <section className="shipping">
@@ -54,13 +51,11 @@ export const ShippingPage = () => {
                   </option>
                 ))}
             </select>
-            {/* Add the code for the STATE DROPDOWN*/}
           </div>
           <div>
             <label>Pin Code</label>
             <input type="number" placeholder="Enter Pincode" />
           </div>
-          {/* Enter thr code for contact            */}
           <div>
             <label>Phone Number</label>
             <input type="number" placeholder="Enter phone number" />

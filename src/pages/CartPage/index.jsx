@@ -1,15 +1,12 @@
 import './cart.scss';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import burger1 from './../../../public/assets/burger1.png';
-import burger2 from './../../../public/assets/burger2.png';
-import burger3 from './../../../public/assets/burger3.png';
 import { PRODUCTS } from '../../products';
 import { ShopContext } from '../../context/shop-context';
 
-const CartItem = ({ title, img, increment, decrement, quantity, price }) => {
-  const { cartItems } = useContext(ShopContext);
+const CartItem = ({ id, title, img, price }) => {
+  const { cartItems, addToCart, removeFromCart } = useContext(ShopContext);
 
   return (
     <div className="cartItem">
@@ -24,98 +21,49 @@ const CartItem = ({ title, img, increment, decrement, quantity, price }) => {
       </div>
 
       <div>
-        <button onClick={decrement}>-</button>
-        <input type="number" readOnly value={quantity} />
-        <button onClick={increment}>+</button>
+        <button onClick={() => removeFromCart(id)}>-</button>
+        <input type="number" readOnly value={cartItems[id]} />
+        <button onClick={() => addToCart(id)}>+</button>
       </div>
     </div>
   );
 };
 
 export const CartPage = () => {
-  const { cartItems } = useContext(ShopContext);
-  const { addToCart } = useContext(ShopContext);
-  const { removeFromCart } = useContext(ShopContext);
+  const { cartItems, getSubtotal, getTax, getShippingCharges, getTotal } =
+    useContext(ShopContext);
 
-  const [cheeseBugergerCount, setCheeseBugergerCount] = useState(0);
-  const [vegBurgerCount, setVegBurgerCount] = useState(0);
-  const [cheeseburgerWithFries, setCheeseburgerWithFries] = useState(0);
-
-  const increment = (setter) => () => setter((prevValue) => prevValue + 1);
-
-  const decrement = (setter) => () =>
-    setter((prevValue) => Math.max(prevValue - 1, 0));
-
-  const subTotal =
-    cheeseBugergerCount * 200 +
-    vegBurgerCount * 500 +
-    cheeseburgerWithFries * 1800;
-  const tax = subTotal * 0.18;
-  const shippingCharges = 200;
-  const total = subTotal + tax + shippingCharges;
+  const subtotal = getSubtotal();
+  const tax = getTax();
+  const shippingCharges = getShippingCharges();
+  const total = getTotal();
 
   console.log(cartItems);
   console.log(PRODUCTS);
+  console.log(subtotal);
 
   return (
     <section className="cart">
       <main>
-        {/* <CartItem
-          title={'Cheese Burger'}
-          img={burger1}
-          quantity={cheeseBugergerCount}
-          increment={increment(setCheeseBugergerCount)}
-          decrement={decrement(setCheeseBugergerCount)}
-          price={200}
-        /> */}
-
         {PRODUCTS.map((product) => {
           if (cartItems[product.itemNum] !== 0) {
             return (
               <CartItem
-                // key={product.itemNum}
+                key={product.itemNum}
+                id={product.itemNum}
                 title={product.title}
                 img={product.burgerSrc}
                 quantity={cartItems[product.itemNum]}
-                increment={increment(setCheeseBugergerCount)}
-                decrement={decrement(setCheeseBugergerCount)}
                 price={product.price}
               />
             );
           }
         })}
 
-        {/* <CartItem
-          title={'Cheese Burger'}
-          img={burger1}
-          quantity={cheeseBugergerCount}
-          increment={increment(setCheeseBugergerCount)}
-          decrement={decrement(setCheeseBugergerCount)}
-          price={200}
-        />
-
-        <CartItem
-          title={'Veg Cheese Burger'}
-          img={burger2}
-          quantity={vegBurgerCount}
-          increment={increment(setVegBurgerCount)}
-          decrement={decrement(setVegBurgerCount)}
-          price={500}
-        />
-
-        <CartItem
-          title={'Cheeseburger with French Fries'}
-          img={burger3}
-          quantity={cheeseburgerWithFries}
-          increment={increment(setCheeseburgerWithFries)}
-          decrement={decrement(setCheeseburgerWithFries)}
-          price={1800}
-        /> */}
-
         <article>
           <div>
             <h4>Sub Total</h4>
-            <p>₹{subTotal}</p>
+            <p>₹{subtotal}</p>
           </div>
           <div>
             <h4>Tax</h4>
